@@ -1,5 +1,5 @@
 /* Este trabajo es la version hecha con ayuda de la inteligencia artificial,
- y entendemos la logica del mismo, en la mayoria del codigo, no lo usamos porque si, sino como
+ y entendemos la lógica del mismo, en la mayoria del código, no lo usamos porque si, sino como
  una herramienta */
 CREATE DATABASE fabrica;
 USE fabrica;
@@ -60,6 +60,65 @@ CREATE TABLE intercambios (
     FOREIGN KEY (id_puesto_origen) REFERENCES puestos(id_puesto),
     FOREIGN KEY (id_puesto_destino) REFERENCES puestos(id_puesto)
 );
+//Datos para cada tabla 
+ --Categorías 
+ INSERT INTO categorias (nombre) VALUES 
+('Alimentos'),
+('Materiales de construcción'),
+('Herramientas'),
+('Medicamentos'),
+('Equipamiento');
+
+-- Recursos
+INSERT INTO recursos (nombre, stock, id_categoria) VALUES
+('Harina de trigo', 500, 1),
+('Arroz', 300, 1),
+('Ladrillos', 2000, 2),
+('Cemento', 1500, 2),
+('Martillos', 50, 3),
+('Destornilladores', 70, 3),
+('Analgésicos', 200, 4),
+('Antibióticos', 150, 4),
+('Generadores eléctricos', 10, 5),
+('Tiendas de campaña', 30, 5);
+
+--Puestoa de avanzada
+INSERT INTO puestos (nombre, latitud, longitud, poblacion) VALUES
+('Puesto Norte', -12.345678, -76.543210, 120),
+('Puesto Sur', -13.456789, -77.654321, 90),
+('Puesto Este', -11.234567, -75.432109, 150),
+('Puesto Oeste', -12.567890, -78.765432, 80),
+('Puesto Central', -12.123456, -76.987654, 200);
+
+--Envíos
+INSERT INTO envios (estado, fecha, id_puesto) VALUES
+('En camino', '2023-05-10 08:30:00', 1),
+('Entregado', '2023-05-08 14:15:00', 2),
+('Pendiente', '2023-05-12 10:00:00', 3),
+('En camino', '2023-05-11 09:45:00', 4),
+('Entregado', '2023-05-09 16:20:00', 5);
+
+--Detalles de envío
+INSERT INTO detalle_envio (id_envio, id_recurso, cantidad, peso_unitario) VALUES
+(1, 1, 50, 1.5),
+(1, 3, 100, 2.3),
+(2, 5, 10, 0.8),
+(2, 7, 30, 0.1),
+(3, 2, 40, 1.0),
+(3, 4, 80, 25.0),
+(4, 6, 15, 0.3),
+(4, 9, 2, 50.0),
+(5, 8, 25, 0.2),
+(5, 10, 5, 15.0);
+
+--Intercambio entre puestos
+INSERT INTO intercambios (fecha, id_recurso, cantidad, id_puesto_origen, id_puesto_destino) VALUES
+('2023-05-07 11:30:00', 1, 20, 1, 2),
+('2023-05-08 15:45:00', 3, 50, 5, 3),
+('2023-05-09 09:20:00', 5, 5, 2, 4),
+('2023-05-10 14:10:00', 7, 15, 3, 1),
+('2023-05-11 10:30:00', 9, 1, 4, 5);
+
 //consultas
 -- Medicamentos con bajo stock
 SELECT r.nombre, r.stock
